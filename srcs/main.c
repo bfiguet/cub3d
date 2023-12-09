@@ -41,6 +41,15 @@ static int	is_cub_file(char *arg)
 	return (1);
 }
 
+void	print_err(t_game *game, char *s)
+{
+	ft_putstr_fd("Error: \n", 2);
+	ft_putstr_fd(s, 2);
+	free_next_line(game);
+	free_game(game);
+	exit(EXIT_FAILURE);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;

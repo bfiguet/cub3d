@@ -31,7 +31,10 @@ int	is_map(t_game *game, char *line)
 		if (game->north == NULL || game->south == NULL
 			|| game->east == NULL || game->west == NULL
 			|| game->color_c == NULL || game->color_f == NULL)
-			print_err (game, "Texture or color isn't defined\n");
+		{
+			free(line);
+			print_err(game, "Texture or color isn't defined\n");
+		}
 		return (1);
 	}
 	return (0);

@@ -61,7 +61,10 @@ static int	add_line(t_game *game, char *line, int nb_l)
 	return (nb_l);
 }
 
-static int	parse_line(t_game *game, char *line, int nb_l, int status)
+// Unreachable code:
+//	if (game->pts != NULL && status == 0)
+//		print_err(game, "empty line\n");
+static int	parse_line(t_game *game, char *line, int nb_l)
 {
 	if (line == NULL || ft_strcmp(line, "\n") == 0 || is_empty(line))
 	{
@@ -72,15 +75,14 @@ static int	parse_line(t_game *game, char *line, int nb_l, int status)
 		}
 	}
 	else if (ft_strcmp(line, "") == 0)
-	{
 		free(line);
-		if (game->pts != NULL && status == 0)
-			print_err(game, "empty line\n");
-	}
 	else if (is_map(game, line) == 1)
 	{
 		if (game->map == 1)
-			print_err(game, "map should be the last in the file\n");
+		{
+			free(line);
+			print_err(game, "The map should be the last in the file\n");
+		}
 		nb_l = add_line(game, line, nb_l);
 		nb_l++;
 	}
@@ -99,6 +101,7 @@ void	parse_map(t_game *game, char *av)
 	nb_l = 0;
 	status = 0;
 	fd = open(av, O_RDONLY);
+	game->fd = fd;
 	line = NULL;
 	if (fd < 0)
 		print_err(game, "failed to load map\n");
@@ -107,7 +110,7 @@ void	parse_map(t_game *game, char *av)
 		line = get_next_line(fd);
 		if (line == NULL)
 			status = 1;
-		nb_l = parse_line(game, line, nb_l, status);
+		nb_l = parse_line(game, line, nb_l);
 	}
 	close(fd);
 }

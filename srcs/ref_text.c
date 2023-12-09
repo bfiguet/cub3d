@@ -102,7 +102,10 @@ void	ref_text(t_game *game, char *line)
 
 	i = 0;
 	if (game->pts != NULL)
+	{
+		free(line);
 		print_err(game, "the map should be the last in the file\n");
+	}
 	else
 	{
 		while (line[i] == ' ')

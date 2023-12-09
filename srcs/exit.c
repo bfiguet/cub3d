@@ -77,10 +77,21 @@ void	free_game(t_game *game)
 	}
 }
 
-void	print_err(t_game *game, char *s)
+void	free_next_line(t_game *game)
 {
-	ft_putstr_fd("Error: \n", 2);
-	ft_putstr_fd(s, 2);
-	free_game(game);
-	exit(EXIT_FAILURE);
+	char	*line;
+	int		fd;
+	int		status;
+
+	status = 0;
+	fd = game->fd;
+	line = NULL;
+	while (status == 0)
+	{
+		line = get_next_line(fd);
+		free(line);
+		if (line == NULL)
+			status = 1;
+	}
+	close(fd);
 }
