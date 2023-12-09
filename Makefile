@@ -3,8 +3,8 @@ SHELL	= /bin/bash
 CC		=	gcc
 NAME	=	cub3d
 CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	+=	-g3 -fsanitize=address
-#CFLAGS	+=	-g  
+#CFLAGS	+=	-g3 -fsanitize=address
+CFLAGS	+=	-g
 #valgrind --tool=memcheck --leak-check=yes
 
 MLX_PATH = mlx/
