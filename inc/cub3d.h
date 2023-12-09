@@ -6,7 +6,7 @@
 /*   By: bfiguet <bfiguet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 16:13:16 by bfiguet           #+#    #+#             */
-/*   Updated: 2023/12/08 17:47:38 by bfiguet          ###   ########.fr       */
+/*   Updated: 2023/12/09 20:00:22 by bfiguet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 #  define RIGHT 65363
 #  define LEFT 65361
 #  define UP 65364
-#  define DOWN 65362 
+#  define DOWN 65362
 #  define ESC 65307
 #  define BUTTON 79
 #  define CLOSE 33
@@ -141,11 +141,13 @@ typedef struct s_game
 	int			ref_color_c;
 	int			view;
 	int			map;
+	int			fd;
 }				t_game;
 
 //MAIN.C
 void	cub3d(t_game *game);
 int		loop(t_game *game);
+void	print_err(t_game *game, char *s);
 
 //PAYCASTING.C
 void	raycasting(t_game *game);
@@ -168,7 +170,7 @@ void	player_move(t_game *game);
 //EXIT.C
 void	free_img(t_game *game, t_img *img);
 void	free_game(t_game *game);
-void	print_err(t_game *game, char *s);
+void	free_next_line(t_game *game);
 
 //INIT.C
 t_img	*init_img(void);
